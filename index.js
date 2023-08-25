@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Products = require("./db");
 const cors = require("cors");
 const app = express();
 const port = 8000;
+const route = require("./routes/auth");
 require("dotenv").config();
 
 app.use(cors());
@@ -15,54 +15,11 @@ mongoose
   .then(() => console.log("database connection successful"))
   .catch(err => console.log(err.message));
 
-// Get all users
-app.get("/products", async (req, res) => {
-  try {
-    const { type } = req.query || {};
+// Here Routs
+app.use(route);
 
-    let users;
-    if (type) {
-      users = await Products.find({ type });
-    } else {
-      users = await Products.find();
-    }
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// Create a user
-app.post("/products", async (req, res) => {
-  try {
-    const newUser = new Products(req.body);
-    await newUser.save();
-    res.json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// Update a user
-app.put("/users/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedUser = await Products.findByIdAndUpdate(id, req.body, { new: true });
-    res.json(updatedUser);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// Delete a user
-app.delete("/users/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    await Products.findByIdAndDelete(id);
-    res.json({ message: "User deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
+app.get("/", (req, res) => {
+  res.send("Running the server on Karbar App");
 });
 
 app.listen(port, () => {
