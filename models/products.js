@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 // Create a schema for your data
 const productsSchema = new mongoose.Schema({
   productImg: String,
@@ -9,15 +8,14 @@ const productsSchema = new mongoose.Schema({
   message: String,
   reviews: String,
   star: String,
-  price:Number,
-  color:String,
-  category:String,
-  size:String,
+  price: Number,
+  color: String,
+  category: String,
+  size: String,
   type: {
     type: String,
-    enum: ['women','man','kids','sport','beauty']
-  }
-  // Add other fields as needed
+    enum: ["women", "man", "kids", "sport", "beauty"],
+  },
 });
 
 // Create a model based on the schema
