@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const port = 8000;
-const route = require("./routes/auth");
+const products = require("./routes/products");
+const orders = require("./routes/orders");
 require("dotenv").config();
 
 app.use(cors());
@@ -16,7 +17,8 @@ mongoose
   .catch(err => console.log(err.message));
 
 // Here Routs
-app.use(route);
+app.use(products);
+app.use(orders);
 
 app.get("/", (req, res) => {
   res.send("Running the server on Karbar App");

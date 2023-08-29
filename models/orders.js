@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 // Create a schema for your data
 const ordersSchema = new mongoose.Schema({
   firstName: String,
@@ -10,8 +9,8 @@ const ordersSchema = new mongoose.Schema({
   altNo: String,
   country: String,
   city: String,
+  payment: String,
   orders: Array,
-  
 });
 
 // Create a model based on the schema

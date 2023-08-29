@@ -6,7 +6,7 @@ const getOrders = async (req, res) => {
     const orders = await Orders.find();
     res.json(orders);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error getOrders" });
   }
 };
 
@@ -16,9 +16,9 @@ const addOrder = async (req, res) => {
     const order = new Orders(req.body);
     await order.save();
     res.json(order);
-    console.log(order);
+    // console.log(order);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error addOrder" });
   }
 };
 
