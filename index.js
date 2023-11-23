@@ -5,6 +5,7 @@ const app = express();
 const port = 8000;
 const products = require("./routes/products");
 const orders = require("./routes/orders");
+const users = require("./routes/user");
 require("dotenv").config();
 
 app.use(cors());
@@ -21,6 +22,7 @@ mongoose
 // Here Routs
 app.use(products);
 app.use(orders);
+app.use(users);
 
 app.get("/", (req, res) => {
   res.send("Running the server on Karbar App");
