@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 // Create a schema for your data
 const ordersSchema = new mongoose.Schema({
+  email: String,
   firstName: String,
   lastName: String,
   address: String,
