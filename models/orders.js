@@ -11,6 +11,7 @@ const ordersSchema = new mongoose.Schema({
   country: String,
   city: String,
   payment: String,
+  date: String,
   orders: Array,
 });
 
