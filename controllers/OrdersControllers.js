@@ -1,4 +1,5 @@
 const Orders = require("../models/orders");
+const ObjectId = require("mongodb").ObjectId;
 
 // Add this func to get orders
 const getOrders = async (req, res) => {
@@ -7,6 +8,16 @@ const getOrders = async (req, res) => {
     res.json(orders);
   } catch (error) {
     res.status(500).json({ error: "Internal server error getOrders" });
+  }
+};
+// Add this func to get single orders
+const getSingleOrders = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const result = await Orders.findOne({ _id: orderId });
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error single Order" });
   }
 };
 
@@ -21,5 +32,21 @@ const addOrder = async (req, res) => {
     res.status(500).json({ error: "Internal server error addOrder" });
   }
 };
+//  Delete Order
 
-module.exports = { getOrders, addOrder };
+const deleteOrder = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const result = await Orders.deleteOne({ _id: orderId });
+
+    if (result.deletedCount === 1) {
+      res.json({ message: "Order deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Order not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error deleting order" });
+  }
+};
+
+module.exports = { getOrders, addOrder, deleteOrder, getSingleOrders };
