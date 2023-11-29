@@ -11,6 +11,6 @@ const router = express.Router();
 router.get("/products", getProducts);
 router.post("/product", addProduct);
 router.post("/create-checkout-session", payments);
-router.post("/products/:id", deleteProduct);
+router.delete("/productDelete/:id", deleteProduct);
 
 module.exports = router;
