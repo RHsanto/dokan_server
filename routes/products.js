@@ -4,7 +4,8 @@ const router = express.Router();
 
 // Here Products Route
 router.get("/products", getProducts);
-router.post("/products", addProduct);
+router.post("/product", addProduct);
 router.post("/create-checkout-session", payments);
+router.post("/products/:id", addProduct);
 
 module.exports = router;

@@ -31,6 +31,21 @@ const addProduct = async (req, res) => {
   }
 };
 
+const deleteProduct = async (req, res) => {
+  try {
+    const ProductId = req.params.id;
+    const result = await Products.deleteOne({ _id: ProductId });
+
+    if (result.deletedCount === 1) {
+      res.json({ message: "Products deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Products not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error Products order" });
+  }
+};
+
 // Add stripe payment system
 const payments = async (req, res) => {
   // get cartItems
@@ -74,4 +89,4 @@ const payments = async (req, res) => {
   res.send({ url: session.url });
 };
 
-module.exports = { getProducts, addProduct, payments };
+module.exports = { getProducts, addProduct, payments, deleteProduct };

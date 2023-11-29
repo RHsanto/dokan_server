@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Create a schema for your data
+// Create a schema for product data
 const productsSchema = new mongoose.Schema({
   productImg: String,
   name: String,
@@ -11,6 +11,7 @@ const productsSchema = new mongoose.Schema({
   price: Number,
   color: String,
   category: String,
+  quantity: Number,
   size: String,
   type: {
     type: String,

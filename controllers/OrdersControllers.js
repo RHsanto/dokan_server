@@ -32,8 +32,8 @@ const addOrder = async (req, res) => {
     res.status(500).json({ error: "Internal server error addOrder" });
   }
 };
-//  Delete Order
 
+//  Delete Order
 const deleteOrder = async (req, res) => {
   try {
     const orderId = req.params.id;
