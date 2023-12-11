@@ -36,6 +36,25 @@ const getSingleUser = async (req, res) => {
 };
 
 // user info edit
+// const editUserInfo = async (req, res) => {
+//   try {
+//     const { email } = req.params || "";
+//     if (!email) return res.status(400).json({ message: "User not found" });
+
+//     const user = await Users.findOne({ email });
+//     if (!user || !user._id) return res.status(400).json({ msg: "User not found" });
+
+//     const updateData = { ...req.body };
+//     const results = await Users.updateOne({ email }, { $set: updateData });
+
+//     res.status(results.acknowledged ? 200 : 400).json({ success: results.acknowledged });
+//   } catch (error) {
+//     console.error("Error in editUserInfo:", error);
+//     res
+//       .status(500)
+//       .json({ success: false, error: "Internal server error", details: error.message });
+//   }
+// };
 const editUserInfo = async (req, res) => {
   try {
     const { email } = req.params || "";
@@ -45,7 +64,16 @@ const editUserInfo = async (req, res) => {
     if (!user || !user._id) return res.status(400).json({ msg: "User not found" });
 
     const updateData = { ...req.body };
-    const results = await Users.updateOne({ email }, { $set: updateData });
+    const filteredUpdateData = {};
+
+    // Filter out undefined or empty fields
+    for (const key in updateData) {
+      if (updateData[key] !== undefined && updateData[key] !== "") {
+        filteredUpdateData[key] = updateData[key];
+      }
+    }
+
+    const results = await Users.updateOne({ email }, { $set: filteredUpdateData });
 
     res.status(results.acknowledged ? 200 : 400).json({ success: results.acknowledged });
   } catch (error) {
